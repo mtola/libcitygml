@@ -26,6 +26,7 @@ INCLUDE_DIRECTORIES( ${CMAKE_SOURCE_DIR}/sources/include
                         ${PROJECT_BINARY_DIR}/include)
 
 SET(SOURCES
+  src/citygml/attributesmap.cpp
   src/citygml/citymodel.cpp
   src/citygml/tesselator.cpp
   src/citygml/object.cpp
@@ -90,6 +91,8 @@ endif(UNIX)
 
 SET(PUBLIC_HEADER
   ${CMAKE_BINARY_DIR}/include/citygml/citygml_api.h
+  ${CMAKE_BINARY_DIR}/include/citygml/citygml_export.h
+  include/citygml/attributesmap.h
   include/citygml/citygmllogger.h
   include/citygml/polygon.h
   include/citygml/material.h
@@ -194,7 +197,7 @@ INSTALL(
     FILES        
       ${EXPORT_HEADER_FILE_NAME}
     DESTINATION  
-      ${INCLUDE_INSTALL_DIR}/citygml
+      ${INCLUDE_INSTALL_DIR}
 )
       
 

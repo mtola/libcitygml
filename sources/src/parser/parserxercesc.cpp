@@ -203,6 +203,11 @@ namespace citygml
 
     class StdLogger : public CityGMLLogger {
     public:
+
+        StdLogger(LOGLEVEL level = LOGLEVEL::LL_ERROR):CityGMLLogger(level){
+
+        };
+
         virtual void log(LOGLEVEL level, const std::string& message, const char* file, int line) const
         {
             std::ostream& stream = level == LOGLEVEL::LL_ERROR ? std::cerr : std::cout;
@@ -234,12 +239,7 @@ namespace citygml
             }
 
             stream << " " << message << std::endl;
-        }
-
-        virtual bool isEnabledFor(LOGLEVEL) const
-        {
-            return true;
-        }
+        }     
     };
 
     std::mutex xerces_init_mutex;
@@ -261,7 +261,7 @@ namespace citygml
             xerces_init_mutex.unlock();
         }
         catch (const xercesc::XMLException& e) {
-            CITYGML_LOG_ERROR(logger, "Could not initialize xercesc XMLPlatformUtils, a XML Exception occured : " << toStdString(e.getMessage()));
+            CITYGML_LOG_ERROR(logger, "Could not initialize xercesc XMLPlatformUtils, a XML Exception occurred : " << toStdString(e.getMessage()));
             return false;
         }
 
@@ -289,15 +289,15 @@ namespace citygml
         }
         catch ( const xercesc::XMLException& e )
         {
-            CITYGML_LOG_ERROR(logger, "XML Exception occured: " << toStdString(e.getMessage()));
+            CITYGML_LOG_ERROR(logger, "XML Exception occurred: " << toStdString(e.getMessage()));
         }
         catch ( const xercesc::SAXParseException& e )
         {
-            CITYGML_LOG_ERROR(logger, "SAXParser Exception occured: " << toStdString(e.getMessage()));
+            CITYGML_LOG_ERROR(logger, "SAXParser Exception occurred: " << toStdString(e.getMessage()));
         }
         catch ( const std::exception& e )
         {
-            CITYGML_LOG_ERROR(logger, "Unexpected Exception occured: " << e.what());
+            CITYGML_LOG_ERROR(logger, "Unexpected Exception occurred: " << e.what());
         }
 #endif
 
